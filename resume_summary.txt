@@ -1,0 +1,106 @@
+```json
+{
+  "personal_info": {
+    "name": "Shubham Kumar",
+    "contact_details": {
+      "phone": "+91-9711776389",
+      "email": "sk311@gmail.com",
+      "linkedin": "linkedin.com/in/shubham-kr-1h",
+      "github": "github.com/ShubK9"
+    }
+  },
+  "summary": "Enthusiastic and motivated Software Developer with a foundational knowledge of Python, Java, and Web Development. Gained hands-on experience in building responsive, user-friendly websites using HTML, CSS, and JavaScript through personal and client projects. Passionate about continuously learning new technologies and applying problem-solving skills to create innovative solutions. Eager to contribute to impactful projects, enhance technical expertise, and grow within the IT industry while delivering high-quality applications.",
+  "education": [
+    {
+      "institution": "Indian Institute of Computer science Delhi, India",
+      "degree": "Advance Diploma in Website Development",
+      "dates": "June 2022 - December 2024"
+    },
+    {
+      "institution": "Pataliputra University Patna, Bihar, India",
+      "degree": "B.Sc. in Mathematics (Honours)",
+      "dates": "June 2021 - April 2024"
+    }
+  ],
+  "technical_skills": {
+    "skills": [
+      "Python",
+      "Java",
+      "React.Js",
+      "MySQL"
+    ],
+    "specialized": [
+      "Web Development (HTML/CSS/JavaScript, Bootstrap)"
+    ],
+    "libraries_and_tools": [
+      "Pandas",
+      "Git/GitHub"
+    ],
+    "additional_skills": [
+      "WordPress",
+      "Adobe Photoshop",
+      "CorelDRAW",
+      "Adobe Illustrator",
+      "Adobe InDesign"
+    ]
+  },
+  "work_experience": [
+    {
+      "title": "Freelancing Work",
+      "company": "Delhi, India",
+      "dates": "March 2024 - May 2024",
+      "description": [
+        "Developed a website for local travel agencies using HTML, CSS, Bootstrap, and basic JavaScript – Providing a platform for advertising their services and enabling online booking. The project helped improve their online presence and streamline customer interactions.",
+        "Collaborated with a team to develop multiple websites for local startups and vendors – contributing to the design and functionality to help enhance their online presence and reach their target audience."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Alien Invasion – Pygame Space Shooter",
+      "description": "Developed a 2D space shooter game where players control a spaceship to fend off alien invaders.",
+      "technologies": [
+        "Pygame",
+        "Python"
+      ],
+      "key_achievements": [
+        "Created dynamic game mechanics, including enemy spawning, collision detection, and power-ups.",
+        "Optimized the game loop with FPS control for smooth and responsive gameplay.",
+        "Focused on performance improvements to ensure consistent frame rates across devices."
+      ]
+    },
+    {
+      "name": "MadMics Web Hub",
+      "description": "Built a responsive website for MadMics Web Hub, focusing on user interaction and dynamic content.",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "key_achievements": [
+        "Developed a mobile-first responsive layout with cross-browser compatibility.",
+        "Implemented dynamic content and interactive UI elements to enhance user engagement.",
+        "Optimized website performance for faster load times and improved user experience."
+      ]
+    },
+    {
+      "name": "Text-to-Image Generator",
+      "technologies": [
+        "Python",
+        "Streamlit",
+        "OpenAI API"
+      ],
+      "description": "Enabled real-time text input processing and image generation with OpenAI API, featuring a user-friendly interface and seamless feedback."
+    },
+    {
+      "name": "Web Browser",
+      "technologies": [
+        "Python",
+        "PyQt5"
+      ],
+      "description": "Developed core browser features, including navigation controls, search bar, and bookmarking functionality for managing favorite websites."
+    }
+  ],
+  "certifications": []
+}
+```
