@@ -1,48 +1,39 @@
 ```json
-{
-  "jobs": [
-    {
-      "Job Title": "Senior Software Engineer- Java Fullstack",
-      "Company": "go4WorldBusiness.com",
-      "Location": "Delhi, Delhi",
-      "Matching reason": "Matches Java, HTML, CSS, JavaScript skills. Experience level might be higher than the candidate's.",
-      "URL to apply": "https://in.indeed.com/q-html-css-javascript-reactjs-l-delhi-jobs.html"
-    },
-    {
-      "Job Title": "Web Developer",
-      "Company": "Aimlay",
-      "Location": "Delhi, Delhi",
-      "Matching reason": "Matches HTML, CSS, JavaScript skills. Aligns with the candidate's web development experience.",
-      "URL to apply": "https://in.indeed.com/q-html-css-javascript-java-l-delhi,-delhi-jobs.html"
-    },
-    {
-      "Job Title": "Software Developer",
-      "Company": "Millennium Energy Global Private Limited",
-      "Location": "Okhla, Delhi",
-      "Matching reason": "Matches React.js skills and general software development experience.",
-      "URL to apply": "https://in.indeed.com/q-react-js-developer-l-delhi,-delhi-jobs.html"
-    },
-    {
-      "Job Title": "Fullstack Python Developer",
-      "Company": "Indeed",
-      "Location": "Delhi",
-      "Matching reason": "Matches Python, HTML, CSS, and JavaScript skills. Aligns with full-stack development capabilities.",
-      "URL to apply": "https://in.indeed.com/q-html-css-javascript-developer-l-delhi-jobs.html"
-    },
-    {
-      "Job Title": "Java Developer",
-      "Company": "Pioneer E Solutions",
-      "Location": "Delhi, Delhi",
-      "Matching reason": "Matches Java skills. Could be a good fit if the candidate is looking to expand their Java experience.",
-      "URL to apply": "https://in.indeed.com/q-c%2C-c++-%2C-react-js%2C-node-js%2C-java-l-delhi-jobs.html"
-    },
-     {
-      "Job Title": "Front End Developer",
-      "Company": "Staar Payout Private Limited",
-      "Location": "Vikas Puri, Delhi, Delhi",
-      "Matching reason": "Matches HTML, CSS, and JavaScript skills, which are core requirements for front-end development. The candidate's project experience aligns well with this role.",
-      "URL to apply": "https://in.indeed.com/q-html-css-javascript-python-jobs.html"
-    }
-  ]
-}
+[
+  {
+    "Title": "Junior Software Developer",
+    "Company": "LLUMO AI",
+    "Location": "Noida, Uttar Pradesh",
+    "Match Reason": "Matches skills in JS/Python and web dev basics. Location in Delhi NCR.",
+    "Apply URL": "https://in.linkedin.com/jobs/view/junior-software-developer-at-llumo-ai-4204875526"
+  },
+  {
+    "Title": "Jr. Software Engineer - HTML",
+    "Company": "Flexsin Inc.",
+    "Location": "Delhi Cantonment, Delhi, India",
+    "Match Reason": "Matches skills in HTML and web development. Location in Delhi.",
+    "Apply URL": "https://in.linkedin.com/jobs/view/jr-software-engineer-html-at-flexsin-inc-4232290990"
+  },
+  {
+    "Title": "Software Developer- React JS",
+    "Company": "Mobility Infotech",
+    "Location": "Delhi Cantonment, Delhi, India",
+    "Match Reason": "Matches skills in ReactJS and web development. Location in Delhi.",
+    "Apply URL": "https://in.linkedin.com/jobs/view/software-developer-react-js-at-mobility-infotech-4238457791"
+  },
+  {
+    "Title": "Frontend Web Developer(HTML, CSS, Javascript, SASS, Flex box, Grid, React.Js)",
+    "Company": "Digihelic Solutions Pvt. Ltd",
+    "Location": "New Delhi, Delhi, India",
+    "Match Reason": "Matches skills in HTML, CSS, Javascript, React.Js. Location in Delhi.",
+    "Apply URL": "https://in.linkedin.com/jobs/view/frontend-web-developer-html-css-javascript-sass-flex-box-grid-react-js-location-pan-india-at-digihelic-solutions-pvt-ltd-4241208828"
+  },
+  {
+    "Title": "Web Developer",
+    "Company": "TechNest Intern",
+    "Location": "New Delhi, Delhi, India",
+    "Match Reason": "Matches skills in web development. Location in Delhi.",
+    "Apply URL": "https://in.linkedin.com/jobs/view/web-developer-at-technest-intern-4236673707"
+  }
+]
 ```

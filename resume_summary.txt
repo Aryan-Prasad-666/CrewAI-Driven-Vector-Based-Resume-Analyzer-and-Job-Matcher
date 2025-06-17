@@ -2,7 +2,7 @@
 {
   "personal_info": {
     "name": "Shubham Kumar",
-    "contact_details": {
+    "contact": {
       "phone": "+91-9711776389",
       "email": "sk311@gmail.com",
       "linkedin": "linkedin.com/in/shubham-kr-1h",
@@ -14,25 +14,21 @@
     {
       "institution": "Indian Institute of Computer science Delhi, India",
       "degree": "Advance Diploma in Website Development",
-      "dates": "June 2022 - December 2024"
+      "duration": "June 2022 - December 2024"
     },
     {
       "institution": "Pataliputra University Patna, Bihar, India",
       "degree": "B.Sc. in Mathematics (Honours)",
-      "dates": "June 2021 - April 2024"
+      "duration": "June 2021 - April 2024"
     }
   ],
-  "technical_skills": {
-    "skills": [
+  "skills": {
+    "technical_skills": [
       "Python",
       "Java",
       "React.Js",
-      "MySQL"
-    ],
-    "specialized": [
-      "Web Development (HTML/CSS/JavaScript, Bootstrap)"
-    ],
-    "libraries_and_tools": [
+      "MySQL",
+      "Web Development (HTML/CSS/JavaScript, Bootstrap)",
       "Pandas",
       "Git/GitHub"
     ],
@@ -46,13 +42,9 @@
   },
   "work_experience": [
     {
-      "title": "Freelancing Work",
-      "company": "Delhi, India",
-      "dates": "March 2024 - May 2024",
-      "description": [
-        "Developed a website for local travel agencies using HTML, CSS, Bootstrap, and basic JavaScript – Providing a platform for advertising their services and enabling online booking. The project helped improve their online presence and streamline customer interactions.",
-        "Collaborated with a team to develop multiple websites for local startups and vendors – contributing to the design and functionality to help enhance their online presence and reach their target audience."
-      ]
+      "company": "Freelancing Work Delhi, India",
+      "duration": "March 2024 - May 2024",
+      "description": "* Developed a website for local travel agencies using HTML, CSS, Bootstrap, and basic JavaScript – Providing a platform for advertising their services and enabling online booking. The project helped improve their online presence and streamline customer interactions. * Collaborated with a team to develop multiple websites for local startups and vendors – contributing to the design and functionality to help enhance their online presence and reach their target audience."
     }
   ],
   "projects": [
@@ -63,7 +55,7 @@
         "Pygame",
         "Python"
       ],
-      "key_achievements": [
+      "achievements": [
         "Created dynamic game mechanics, including enemy spawning, collision detection, and power-ups.",
         "Optimized the game loop with FPS control for smooth and responsive gameplay.",
         "Focused on performance improvements to ensure consistent frame rates across devices."
@@ -77,30 +69,34 @@
         "CSS",
         "JavaScript"
       ],
-      "key_achievements": [
+      "achievements": [
         "Developed a mobile-first responsive layout with cross-browser compatibility.",
         "Implemented dynamic content and interactive UI elements to enhance user engagement.",
         "Optimized website performance for faster load times and improved user experience."
       ]
     },
     {
-      "name": "Text-to-Image Generator",
-      "technologies": [
-        "Python",
-        "Streamlit",
-        "OpenAI API"
-      ],
-      "description": "Enabled real-time text input processing and image generation with OpenAI API, featuring a user-friendly interface and seamless feedback."
-    },
-    {
-      "name": "Web Browser",
-      "technologies": [
-        "Python",
-        "PyQt5"
-      ],
-      "description": "Developed core browser features, including navigation controls, search bar, and bookmarking functionality for managing favorite websites."
+      "name": "Mini-Projects",
+      "projects": [
+            {
+              "name": "Text-to-Image Generator",
+              "technologies": [
+                "Python",
+                "Streamlit",
+                "OpenAI API"
+              ],
+              "description": "Enabled real-time text input processing and image generation with OpenAI API, featuring a user-friendly interface and seamless feedback."
+            },
+            {
+              "name": "Web Browser",
+              "technologies": [
+                "Python",
+                "PyQt5"
+              ],
+              "description": "Developed core browser features, including navigation controls, search bar, and bookmarking functionality for managing favorite websites."
+            }
+          ]
     }
-  ],
-  "certifications": []
+  ]
 }
 ```
