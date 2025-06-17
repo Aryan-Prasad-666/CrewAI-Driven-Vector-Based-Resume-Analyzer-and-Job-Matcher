@@ -1,0 +1,38 @@
+
+[
+  {
+    "question": "Tell me about a time you faced a significant challenge while developing a website or application. How did you approach the problem, and what was the outcome?",
+    "category": "Behavioral",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Describe your experience with React.js. Can you explain the concept of components and how you've used them in your projects, specifically mentioning any performance optimization techniques you've employed?",
+    "category": "Technical",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Imagine a client requests a website with a very tight deadline. The requirements are somewhat vague initially. How would you manage the project to ensure timely delivery and client satisfaction?",
+    "category": "Situational",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "You've mentioned using HTML, CSS, and JavaScript for web development. Can you describe a situation where you had to choose between different CSS frameworks (like Bootstrap) and explain why you made that choice?",
+    "category": "Technical",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "In your Pygame project, you focused on performance improvements. Can you elaborate on the specific techniques you used to optimize the game loop and ensure consistent frame rates?",
+    "category": "Technical",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Tell me about a time you had to work with a team to develop a website or application. What was your role, and how did you contribute to the team's success? What challenges did you face collaborating, and how did you overcome them?",
+    "category": "Behavioral",
+    "difficulty": "Medium"
+  },
+  {
+    "question": "Suppose you are tasked with building a web application that needs to interact with a MySQL database. Describe the steps you would take to set up the database connection, query the database, and display the data on the webpage. What security considerations would you keep in mind?",
+    "category": "Technical",
+    "difficulty": "Hard"
+  }
+]
