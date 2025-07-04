@@ -1,0 +1,49 @@
+
+Thought: I have gathered enough information. Now I will create the JSON list of matching jobs.
+
+```json
+[
+  {
+    "title": "Mechanical Design Engineer ( Solid Edge)",
+    "company": "Therelek Engineers",
+    "location": "Bengaluru",
+    "match_reason": "Matches skills in Solid Edge and Mechanical Design",
+    "apply_url": "https://www.naukri.com/job-listings-mechanical-design-engineer-solid-edge-therelek-engineers-bengaluru-2-to-7-years-030725014102"
+  },
+  {
+    "title": "Mechanical Design Engineer - CREO",
+    "company": "HCLTech",
+    "location": "Bengaluru, Karnataka",
+    "match_reason": "Matches skills in CREO and Mechanical Design, HCL previous employer",
+    "apply_url": "https://in.linkedin.com/jobs/creo-jobs-bengaluru"
+  },
+  {
+    "title": "Creo Design Engineer - NPD",
+    "company": "Forbes Global 2000 MNC in Engg. & Construction",
+    "location": "Bangalore",
+    "match_reason": "Matches skills in CREO and Design Engineering",
+    "apply_url": "https://www.naukri.com/job-listings-creo-design-engineer-npd-lancesoft-bengaluru-3-to-6-years-020725013524"
+  },
+  {
+    "title": "Creo Design Engineer",
+    "company": "Cadopt Technologies",
+    "location": "Bengaluru/Bangalore,Coimbatore",
+    "match_reason": "Matches skills in CREO and Design Engineering",
+    "apply_url": "https://www.naukri.com/job-listings-creo-design-engineer-cadopt-technologies-coimbatore-bengaluru-1-to-3-years-120625013450"
+  },
+    {
+    "title": "Quality Assurance Engineer I",
+    "company": "Amazon",
+    "location": "Bengaluru",
+    "match_reason": "Matches experience in Quality Assurance",
+    "apply_url": "https://www.glassdoor.com/job-listing/quality-assurance-engineer-i-amazon-JV_IC2940587_KO0,28_KE29,35.htm?jl=1009778359797"
+  },
+  {
+    "title": "Quality Assurance Engineer",
+    "company": "Concentrix",
+    "location": "Bengaluru",
+    "match_reason": "Matches experience in Quality Assurance",
+    "apply_url": "https://www.glassdoor.com/job-listing/quality-assurance-engineer-concentrix-JV_IC2940587_KO0,26_KE27,37.htm?jl=1009800938971"
+  }
+]
+```
