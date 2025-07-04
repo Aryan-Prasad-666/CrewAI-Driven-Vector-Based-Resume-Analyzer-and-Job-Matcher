@@ -1,0 +1,30 @@
+```json
+{
+  "Mechanical Design Engineer (Solid Edge)": {
+    "ATS Score": 75,
+    "strengths": [
+      "Proficiency in Solid Edge V19, a key requirement for the role.",
+      "Experience in design review and providing feedback on drawing clarity.",
+      "Strong educational background in Mechanical Engineering with relevant coursework."
+    ],
+    "suggestions": [
+      "Quantify achievements in design projects to demonstrate impact.",
+      "Highlight specific design projects and the tools used.",
+      "Tailor the resume summary to emphasize design skills and experience with Solid Edge."
+    ]
+  },
+  "Quality Assurance Engineer": {
+    "ATS Score": 80,
+    "strengths": [
+      "Direct experience in Quality Assurance and Documentation at HCL Technologies.",
+      "Familiarity with ISO 9001 standards and compliance.",
+      "Experience in managing Engineering Change Orders (ECOs) and revision control."
+    ],
+    "suggestions": [
+      "Quantify the impact of quality assurance efforts (e.g., reduced errors, improved efficiency).",
+      "Highlight experience with specific testing methodologies or tools.",
+      "Tailor the resume summary to emphasize quality assurance experience and skills."
+    ]
+  }
+}
+```
