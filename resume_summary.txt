@@ -14,21 +14,25 @@
     {
       "institution": "Indian Institute of Computer science Delhi, India",
       "degree": "Advance Diploma in Website Development",
-      "duration": "June 2022 - December 2024"
+      "dates": "June 2022 - December 2024"
     },
     {
       "institution": "Pataliputra University Patna, Bihar, India",
       "degree": "B.Sc. in Mathematics (Honours)",
-      "duration": "June 2021 - April 2024"
+      "dates": "June 2021 - April 2024"
     }
   ],
-  "skills": {
-    "technical_skills": [
+  "technical_skills": {
+    "skills": [
       "Python",
       "Java",
       "React.Js",
-      "MySQL",
-      "Web Development (HTML/CSS/JavaScript, Bootstrap)",
+      "MySQL"
+    ],
+    "specialized": [
+      "Web Development (HTML/CSS/JavaScript, Bootstrap)"
+    ],
+    "libraries_and_tools": [
       "Pandas",
       "Git/GitHub"
     ],
@@ -42,12 +46,35 @@
   },
   "work_experience": [
     {
-      "company": "Freelancing Work Delhi, India",
-      "duration": "March 2024 - May 2024",
-      "description": "* Developed a website for local travel agencies using HTML, CSS, Bootstrap, and basic JavaScript – Providing a platform for advertising their services and enabling online booking. The project helped improve their online presence and streamline customer interactions. * Collaborated with a team to develop multiple websites for local startups and vendors – contributing to the design and functionality to help enhance their online presence and reach their target audience."
+      "title": "Freelancing Work",
+      "company": "Delhi, India",
+      "dates": "March 2024 - May 2024",
+      "description": [
+        "Developed a website for local travel agencies using HTML, CSS, Bootstrap, and basic JavaScript – Providing a platform for advertising their services and enabling online booking. The project helped improve their online presence and streamline customer interactions.",
+        "Collaborated with a team to develop multiple websites for local startups and vendors – contributing to the design and functionality to help enhance their online presence and reach their target audience."
+      ]
     }
   ],
-  "projects": [
+  "education": [
+    {
+      "institution": "Indian Institute of Computer science Delhi, India",
+      "degree": "Advance Diploma in Website Development",
+      "duration": "June 2022 - December 2024"
+    },
+    {
+      "institution": "Pataliputra University Patna, Bihar, India",
+      "degree": "B.Sc. in Mathematics (Honours)",
+      "duration": "June 2021 - April 2024"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Advance Diploma in Website Development",
+      "institution": "Indian Institute of Computer science Delhi, India",
+      "duration": "June 2022 - December 2024"
+    }
+  ],
+    "projects": [
     {
       "name": "Alien Invasion – Pygame Space Shooter",
       "description": "Developed a 2D space shooter game where players control a spaceship to fend off alien invaders.",
@@ -76,27 +103,23 @@
       ]
     },
     {
-      "name": "Mini-Projects",
-      "projects": [
-            {
-              "name": "Text-to-Image Generator",
-              "technologies": [
-                "Python",
-                "Streamlit",
-                "OpenAI API"
-              ],
-              "description": "Enabled real-time text input processing and image generation with OpenAI API, featuring a user-friendly interface and seamless feedback."
-            },
-            {
-              "name": "Web Browser",
-              "technologies": [
-                "Python",
-                "PyQt5"
-              ],
-              "description": "Developed core browser features, including navigation controls, search bar, and bookmarking functionality for managing favorite websites."
-            }
-          ]
+      "name": "Text-to-Image Generator",
+      "technologies": [
+        "Python",
+        "Streamlit",
+        "OpenAI API"
+      ],
+      "description": "Enabled real-time text input processing and image generation with OpenAI API, featuring a user-friendly interface and seamless feedback."
+    },
+    {
+      "name": "Web Browser",
+      "technologies": [
+        "Python",
+        "PyQt5"
+      ],
+      "description": "Developed core browser features, including navigation controls, search bar, and bookmarking functionality for managing favorite websites."
     }
-  ]
+  ],
+  "certifications": []
 }
 ```
