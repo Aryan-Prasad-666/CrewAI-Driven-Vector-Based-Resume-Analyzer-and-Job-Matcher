@@ -12,16 +12,18 @@
   "professional_summary": "Enthusiastic and motivated Software Developer with a foundational knowledge of Python, Java, and Web Development. Gained hands-on experience in building responsive, user-friendly websites using HTML, CSS, and JavaScript through personal and client projects. Passionate about continuously learning new technologies and applying problem-solving skills to create innovative solutions. Eager to contribute to impactful projects, enhance technical expertise, and grow within the IT industry while delivering high-quality applications.",
   "education": [
     {
+      "degree": "Advance Diploma in Website Development",
       "institution": "Indian Institute of Computer science",
       "location": "Delhi, India",
-      "degree": "Advance Diploma in Website Development",
-      "duration": "June 2022 - December 2024"
+      "start_date": "June 2022",
+      "end_date": "December 2024"
     },
     {
+      "degree": "B.Sc. in Mathematics (Honours)",
       "institution": "Pataliputra University",
       "location": "Patna, Bihar, India",
-      "degree": "B.Sc. in Mathematics (Honours)",
-      "duration": "June 2021 - April 2024"
+      "start_date": "June 2021",
+      "end_date": "April 2024"
     }
   ],
   "skills": {
@@ -33,42 +35,59 @@
   "work_experience": [
     {
       "title": "Freelancing Work",
+      "company": null,
       "location": "Delhi, India",
-      "duration": "March 2024 - May 2024",
+      "start_date": "March 2024",
+      "end_date": "May 2024",
       "responsibilities": [
-        "Developed a website for local travel agencies using HTML, CSS, Bootstrap, and basic JavaScript – Providing a seamless user experience and an intuitive interface for customers to explore various travel packages.",
-        "Implemented responsive design principles, ensuring optimal viewing and interaction across a wide range of devices, including desktops, tablets, and smartphones.",
-        "Collaborated closely with clients to understand their specific requirements and preferences, translating their vision into a functional and aesthetically pleasing website.",
-        "Optimized website performance, resulting in faster loading times and improved search engine visibility, contributing to enhanced online presence and customer engagement."
+        "Developed a website for local travel agencies using HTML, CSS, Bootstrap, and basic JavaScript – Providing a seamless user experience and an intuitive interface.",
+        "Designed and implemented a responsive e-commerce platform for a local business, integrating secure payment gateways and an admin panel for product management.",
+        "Collaborated with clients to understand their requirements, translated them into technical specifications, and delivered customized web solutions that met their business objectives.",
+        "Optimized website performance and ensured cross-browser compatibility, resulting in improved user engagement and accessibility."
       ]
     }
   ],
   "projects": [
     {
-      "title": "E-commerce Website",
-      "duration": "April 2024 - May 2024",
+      "name": "Sentiment Analysis of Tweets using Python",
+      "start_date": "June 2023",
+      "end_date": "July 2023",
       "description": [
-        "Developed a fully functional e-commerce platform using HTML, CSS, JavaScript, and React.js, enabling users to browse products, add them to a cart, and complete purchases securely.",
-        "Implemented user authentication and authorization features, ensuring secure access and personalized experiences for registered users.",
-        "Integrated payment gateway APIs to facilitate seamless and secure transactions, enhancing the overall user experience.",
-        "Designed and implemented a responsive user interface, ensuring optimal viewing and interaction across various devices and screen sizes."
+        "Developed a Python-based sentiment analysis tool to classify tweets as positive, negative, or neutral.",
+        "Utilized natural language processing (NLP) techniques and machine learning algorithms for accurate sentiment detection.",
+        "Processed and analyzed large datasets of tweets, providing insights into public opinion on various topics.",
+        "Implemented data visualization to represent sentiment distribution and trends effectively."
       ]
     },
     {
-      "title": "Weather App",
-      "duration": "March 2024 - March 2024",
+      "name": "Personal Portfolio Website",
+      "start_date": "May 2023",
+      "end_date": "June 2023",
       "description": [
-        "Developed a dynamic weather application using HTML, CSS, and JavaScript, allowing users to search for real-time weather updates by city.",
-        "Integrated a third-party weather API to fetch accurate and up-to-date weather data, including temperature, humidity, and wind speed.",
-        "Implemented a user-friendly interface with clear visual representations of weather conditions, enhancing usability and accessibility.",
-        "Ensured cross-browser compatibility and responsiveness, providing a consistent experience across different devices and web browsers."
+        "Designed and developed a personal portfolio website using HTML, CSS, and JavaScript to showcase projects and skills.",
+        "Implemented responsive design principles to ensure optimal viewing across various devices.",
+        "Integrated interactive elements and animations to enhance user experience and engagement.",
+        "Regularly updated and maintained the website to reflect new projects and skills."
+      ]
+    },
+    {
+      "name": "E-commerce Website (Front-End)",
+      "start_date": "April 2023",
+      "end_date": "May 2023",
+      "description": [
+        "Built the front-end of an e-commerce website using React.js, focusing on creating a dynamic and responsive user interface.",
+        "Implemented features such as product listings, shopping cart functionality, and user authentication.",
+        "Utilized modern UI/UX principles to ensure an intuitive and visually appealing design.",
+        "Collaborated with a back-end developer to integrate APIs and ensure seamless data flow."
       ]
     }
   ],
   "certifications": [
-    "Python Programming (Online Course) - Coursera",
-    "Web Development Bootcamp (Online Course) - Udemy",
-    "JavaScript Essentials (Online Course) - freeCodeCamp"
+    {
+      "name": "Google IT Support Professional Certificate",
+      "issuer": "Coursera",
+      "issue_date": "July 2023"
+    }
   ]
 }
 ```

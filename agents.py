@@ -60,8 +60,8 @@ resume_analyzer = Agent(
 
 job_finder = Agent(
     role='Job Finder',
-    goal='Identify relevant job opportunities that match the candidate’s skills and background extracted from the resume.',
-    backstory='You are a career consultant with deep knowledge of various industries and job markets. You specialize in matching candidate profiles to ideal job listings.',
+    goal='Identify a small number of relevant job opportunities (3-5 max) that match the candidate’s skills and background extracted from the resume, using minimal web searches.',
+    backstory='You are a career consultant with deep knowledge of various industries and job markets. You specialize in matching candidate profiles to ideal job listings. Always prioritize efficiency: use 1-2 targeted search queries at most to find matches from major sites like Indeed or LinkedIn.',
     verbose=True,
     llm=gemini_llm,
     tools=[web_search_tool]
@@ -83,21 +83,22 @@ analyze_resume_task = Task(
         "education, certifications, and personal info."
     ),
     agent=resume_analyzer,
-    output_file='resume_summary.json'  # Changed to .json
+    output_file='resume_summary.json'
 )
 
 find_jobs_task = Task(
     description=(
         "Using the candidate profile from the Resume Analyzer (resume_summary.json), "
-        "search for relevant job listings from Indeed, LinkedIn, Glassdoor, etc.\n"
-        "Match jobs to candidate's background and give output in JSON."
+        "perform 1-2 targeted web searches (e.g., one for Indeed and one for LinkedIn) to find relevant job listings.\n"
+        "Focus on high-match jobs only. Limit to 3-5 jobs total.\n"
+        "Output in JSON format. Do not perform excessive searches—consolidate queries where possible (e.g., 'software engineer jobs in [location] matching [key skills]')."
     ),
     expected_output=(
-        "A JSON list of at least 5 jobs with:\n"
+        "A JSON list of 3-5 jobs with:\n"
         "- Title\n- Company\n- Location\n- Match reason\n- Apply URL"
     ),
     agent=job_finder,
-    output_file='jobs.json',  # Changed to .json
+    output_file='jobs.json',
     context=[analyze_resume_task]
 )
 
@@ -114,44 +115,39 @@ crew = Crew(
     verbose=True
 )
 
-# ... (rest of the original agents.py code) ...
-
 try:
     result = crew.kickoff()
     print("Crew execution completed successfully.")
     print(result)
     
-    # --- POST-PROCESSING STEP ---
-    output_file_path = 'jobs.json'
-    print(f"Cleaning {output_file_path}...")
-    
-    try:
-        with open(output_file_path, 'r') as f:
-            content = f.read()
+    output_files = ['resume_summary.json', 'jobs.json']
+    for output_file_path in output_files:
+        print(f"Cleaning {output_file_path}...")
         
-        # Remove common markdown fence
-        if content.strip().startswith('```json'):
-            content = content.replace('```json', '', 1).strip()
-        if content.strip().endswith('```'):
-            content = content.rsplit('```', 1)[0].strip()
+        try:
+            with open(output_file_path, 'r') as f:
+                content = f.read()
             
-        # Optional: Attempt to load/save to validate and re-format JSON
-        import json
-        clean_data = json.loads(content)
-        
-        with open(output_file_path, 'w') as f:
-            json.dump(clean_data, f, indent=4)
-        
-        print(f"Successfully cleaned and re-saved {output_file_path}.")
+            if content.strip().startswith('```json'):
+                content = content.replace('```json', '', 1).strip()
+            if content.strip().endswith('```'):
+                content = content.rsplit('```', 1)[0].strip()
+                
+            import json
+            clean_data = json.loads(content)
+            
+            with open(output_file_path, 'w') as f:
+                json.dump(clean_data, f, indent=4)
+            
+            print(f"Successfully cleaned and re-saved {output_file_path}.")
 
-    except FileNotFoundError:
-        print(f"Warning: Output file {output_file_path} not found for cleaning.")
-    except json.JSONDecodeError as e:
-        print(f"Error decoding JSON during cleaning: {e}. File content might be malformed.")
-    except Exception as e:
-        print(f"An unexpected error occurred during file cleaning: {e}")
+        except FileNotFoundError:
+            print(f"Warning: Output file {output_file_path} not found for cleaning.")
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON during cleaning: {e}. File content might be malformed.")
+        except Exception as e:
+            print(f"An unexpected error occurred during file cleaning: {e}")
         
-    # --- END POST-PROCESSING STEP ---
 
 except Exception as e:
     print(f"Error during crew execution: {str(e)}")

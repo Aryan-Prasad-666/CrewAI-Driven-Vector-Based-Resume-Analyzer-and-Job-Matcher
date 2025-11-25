@@ -1,37 +1,30 @@
 [
     {
-        "Title": "JUNIOR WEB DEVELOPER",
-        "Company": "Excellence Technologies Pvt. Ltd.",
-        "Location": "Noida, India",
-        "Match reason": "Matches candidate's foundational web development skills (HTML, CSS, JavaScript, Bootstrap) and experience in building responsive websites, as demonstrated in freelance projects and clone projects.",
-        "Apply URL": "https://www.glassdoor.com/Job/junior-developer-jobs-SRCH_IC2891681_KO0,16.htm"
+        "Title": "Entry Level React Developer",
+        "Company": "Solarman Engineering Project Pvt Ltd.",
+        "Location": "Kirti Nagar, Delhi, Delhi",
+        "Match reason": "Strong match with candidate's React.js skills, experience in building responsive web applications, and aligns with an entry-level profile. The candidate has a project building an e-commerce website front-end using React.js.",
+        "Apply URL": "https://in.indeed.com/q-entry-level-react-developer-jobs.html"
     },
     {
-        "Title": "Junior Web Developer",
-        "Company": "BinaryMetrix",
-        "Location": "New Delhi, India",
-        "Match reason": "Directly aligns with the candidate's 'Advance Diploma in Website Development' and practical freelance experience in developing user-friendly websites and e-commerce platforms.",
-        "Apply URL": "https://www.glassdoor.com/Job/nova-deli-web-developer-jobs-SRCH_IL.0,9_IC2891681_KO10,23.htm"
+        "Title": "Front End Developer",
+        "Company": "Various (as per Indeed search results)",
+        "Location": "Delhi, Delhi",
+        "Match reason": "Excellent match with the candidate's strong front-end development skills (HTML/CSS/JavaScript, Bootstrap, React.js) and experience in building user-friendly websites. Snippet also mentioned Python, which the candidate knows.",
+        "Apply URL": "https://in.indeed.com/q-front-end-developer-l-delhi,-delhi-jobs.html"
     },
     {
-        "Title": "Frontend Developer",
-        "Company": "Synergylabs Technology",
-        "Location": "New Delhi, India",
-        "Match reason": "Candidate has strong front-end skills (HTML, CSS, JavaScript, React.Js, Bootstrap) and significant project experience in front-end development (Netflix/Amazon clones), making them suitable for this role.",
-        "Apply URL": "https://www.glassdoor.com/Job/nova-deli-web-developer-jobs-SRCH_IL.0,9_IC2891681_KO10,23.htm"
+        "Title": "Web Developer (Python)",
+        "Company": "Various (as per Indeed search results)",
+        "Location": "Delhi, Delhi",
+        "Match reason": "Good match with the candidate's Python programming skills and general web development experience. The snippet mentioned Python for scalable web applications, which aligns with the candidate's interest in creating innovative solutions.",
+        "Apply URL": "https://in.indeed.com/q-web-developer-python-l-delhi,-delhi-jobs.html"
     },
     {
-        "Title": "Junior Software Developer",
-        "Company": "Tib E-innovations Pvt. Ltd.",
-        "Location": "New Delhi, India",
-        "Match reason": "Candidate possesses foundational knowledge in Python and Java, along with strong web development skills and practical project experience, which are valuable for a junior software developer role with a web focus.",
-        "Apply URL": "https://www.glassdoor.com/Job/new-delhi-html-developer-jobs-SRCH_IL.0,9_IM1083_KO10,24.htm"
-    },
-    {
-        "Title": "Software Developer / Fresher / Trainee",
-        "Company": "BrickWin Consultancy Services Private Limited",
-        "Location": "Delhi NCR, India",
-        "Match reason": "Candidate is a motivated fresher with foundational programming skills (Python, Java) and hands-on web development experience, making them a strong candidate for an entry-level software developer or trainee position.",
-        "Apply URL": "https://www.naukri.com/python-fresher-jobs-in-delhi-ncr"
+        "Title": "React Js Developer (Fresher)",
+        "Company": "Various (as per Indeed search results)",
+        "Location": "Dwarka, Delhi, Delhi",
+        "Match reason": "Direct and strong match for the candidate's React.js skills and 'fresher' status, aligning perfectly with his foundational knowledge and project experience in React.js, making it an ideal entry-level opportunity.",
+        "Apply URL": "https://in.indeed.com/q-react-js-developer-fresher-l-dwarka,-delhi,-delhi-jobs.html"
     }
 ]
