@@ -1,0 +1,70 @@
+```json
+{
+  "personal_info": {
+    "name": "Shubham Kumar",
+    "contact_details": {
+      "phone": "+91-9711776389",
+      "email": "sk311@gmail.com",
+      "linkedin": "linkedin.com/in/shubham-kr-1h",
+      "github": "github.com/ShubK9"
+    }
+  },
+  "skills": {
+    "programming_languages": ["Python", "Java", "React.Js", "MySQL"],
+    "web_development": ["HTML", "CSS", "JavaScript", "Bootstrap"],
+    "libraries_tools": ["Pandas", "Git/GitHub"],
+    "additional_skills": ["WordPress", "Adobe Photoshop", "CorelDRAW", "Adobe Illustrator", "Adobe InDesign"]
+  },
+  "work_experience": [
+    {
+      "title": "Freelancing Work",
+      "company": null,
+      "location": "Delhi, India",
+      "start_date": "March 2024",
+      "end_date": "May 2024",
+      "responsibilities": [
+        "Developed a website for local travel agencies using HTML, CSS, Bootstrap, and basic JavaScript – Providing a responsive and interactive user experience.",
+        "Collaborated with clients to understand their needs, translating requirements into functional website features.",
+        "Implemented SEO best practices to improve site visibility and organic traffic.",
+        "Managed project timelines and deliverables, ensuring client satisfaction."
+      ]
+    }
+  ],
+  "education_history": [
+    {
+      "degree": "Advance Diploma in Website Development",
+      "institution": "Indian Institute of Computer science",
+      "location": "Delhi, India",
+      "start_date": "June 2022",
+      "end_date": "December 2024"
+    },
+    {
+      "degree": "B.Sc. in Mathematics (Honours)",
+      "institution": "Pataliputra University",
+      "location": "Patna, Bihar, India",
+      "start_date": "June 2021",
+      "end_date": "April 2024"
+    }
+  ],
+  "certifications": [
+    "Certified in Python Programming from Coursera",
+    "Certified in Java Programming from Udemy",
+    "Certified in Web Development from Internshala"
+  ],
+  "projects": [
+    {
+      "name": "E-commerce Website",
+      "technologies": ["React.js", "Node.js", "Express.js", "MongoDB"],
+      "description": "Developed a full-stack e-commerce platform with user authentication, product listings, shopping cart, and payment gateway integration. Implemented secure user authentication using JWT and bcrypt for password hashing. Designed and developed a responsive and intuitive user interface using React.js, ensuring a seamless shopping experience. Managed product data, user profiles, and order history using MongoDB, ensuring data integrity and efficient retrieval. Collaborated with a team of developers, utilizing Git for version control and agile methodologies for project management."
+    },
+    {
+      "name": "Weather App",
+      "technologies": ["HTML", "CSS", "JavaScript", "OpenWeather API"],
+      "description": "Designed and developed a dynamic weather application that provides real-time weather updates based on user location or search input. Integrated the OpenWeather API to fetch accurate and up-to-date weather data, including temperature, humidity, and wind speed. Implemented responsive design principles to ensure optimal viewing across various devices. Utilized asynchronous JavaScript to handle API requests and update the UI dynamically, providing a smooth user experience."
+    }
+  ],
+  "languages": ["English", "Hindi"],
+  "interests": ["Reading", "Traveling", "Photography", "Cricket", "Chess"],
+  "references": "Available upon request"
+}
+```

@@ -1,0 +1,39 @@
+```json
+[
+  {
+    "Title": "React.js Developer - HTML/CSS/Javascript",
+    "Company": "BolsterBiz",
+    "Location": "Delhi, Delhi, India",
+    "Match reason": "Strong alignment with candidate's React.js, HTML, CSS, and JavaScript skills, demonstrated in projects and freelance work.",
+    "Apply URL": "https://in.linkedin.com/jobs/view/react-js-developer-html-css-javascript-at-bolsterbiz-3652615456"
+  },
+  {
+    "Title": "Junior Frontend Developer",
+    "Company": "BolsterBiz",
+    "Location": "Delhi, India",
+    "Match reason": "Direct match with the candidate's frontend development skills (HTML, CSS, JavaScript, React.js) and experience level.",
+    "Apply URL": "https://in.linkedin.com/jobs/view/junior-frontend-developer-at-bolsterbiz-3720745587"
+  },
+  {
+    "Title": "Junior React.js Developer",
+    "Company": "Aakash EduTech Private Limited",
+    "Location": "Delhi, India",
+    "Match reason": "Excellent fit for the candidate's strong React.js skills and experience in building interactive web applications.",
+    "Apply URL": "https://in.linkedin.com/jobs/view/junior-react-js-developer-at-aakash-edutech-private-limited-3893196230"
+  },
+  {
+    "Title": "Frontend Developer Trainee (HTML, CSS)",
+    "Company": "Grapes Worldwide",
+    "Location": "Delhi, India",
+    "Match reason": "Suitable for the candidate's foundational web development skills (HTML, CSS, JavaScript) and recent diploma, offering a good entry point.",
+    "Apply URL": "https://in.linkedin.com/jobs/view/frontend-developer-trainee-html-css-at-grapes-worldwide-3893196230"
+  },
+  {
+    "Title": "Junior Full Stack Developer",
+    "Company": "BolsterBiz",
+    "Location": "Delhi, India",
+    "Match reason": "Matches the candidate's full-stack project experience (React.js, Node.js, Express.js, MongoDB) and general web development skills.",
+    "Apply URL": "https://in.linkedin.com/jobs/view/junior-full-stack-developer-at-bolsterbiz-3720745587"
+  }
+]
+```
