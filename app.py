@@ -1,251 +1,198 @@
-from flask import Flask, render_template, request, jsonify, flash, redirect, url_for
 import os
-from werkzeug.utils import secure_filename
+import tempfile
 import json
-from datetime import datetime
-import re # Make sure this is imported
-
-from crewai import Agent, Task, Crew, Process
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from crewai import Agent, Task, Crew, Process, LLM
 from crewai_tools import PDFSearchTool, SerperDevTool
-from crewai import LLM
 from dotenv import load_dotenv
 
-app = Flask(__name__)
-app.secret_key = 'your_super_secret_key_change_me'
-app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-
+# --- Initialization ---
 load_dotenv()
-# Ensure these environment variables are set in your .env file
-gemini_key = os.getenv('ARYAN_GEMINI_KEY') 
-serper_key = os.getenv('SERPER_API_KEY')
+app = Flask(__name__)
+# Allow CORS for development if the frontend is served separately
+CORS(app) 
 
+# --- Configuration (using environment variables from .env) ---
+GEMINI_KEY = os.getenv('ARYAN_GEMINI_KEY')
+SERPER_KEY = os.getenv('SERPER_API_KEY')
 EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
-def initialize_llm():
-    return LLM(
-        model="gemini/gemini-2.5-flash",
-        api_key=gemini_key,
-        temperature=0.5
-    )
+if not GEMINI_KEY or not SERPER_KEY:
+    print("Error: ARYAN_GEMINI_KEY or SERPER_API_KEY not found in environment variables.")
+    # In a real-world scenario, you might want to stop the app or handle this more gracefully.
 
-def create_pdf_tool(pdf_path):
-    return PDFSearchTool(
-        pdf=pdf_path,
-        config=dict(
-            llm=dict(
-                provider="google",
-                config=dict(
-                    model="gemini/gemini-2.5-flash", 
-                    api_key=gemini_key,
-                    temperature=0.5
-                ),
-            ),
-            embedding_model=dict(
-                provider="sentence-transformer", 
-                config=dict(model=EMBEDDING_MODEL_NAME),
-            ),
-            vectordb=dict(
-                provider="chromadb",
-                config=dict(collection_name="resume_project")
-            ),
-        ),
-    )
-
-def create_web_search_tool():
-    return SerperDevTool(api_key=serper_key)
-
-def create_agents_and_tasks(pdf_tool, web_tool, llm):
-    resume_analyzer = Agent(
-        role='Resume Analyzer',
-        goal='Extract detailed information such as skills, work experience, and education from a candidate’s resume text.',
-        backstory='You are a senior HR professional with years of experience in resume analysis and candidate profiling.',
-        verbose=False,
-        llm=llm,
-        tools=[pdf_tool],
-    )
-
-    job_finder = Agent(
-        role='Job Finder',
-        goal='Identify relevant job opportunities that match the candidate’s skills and background extracted from the resume.',
-        backstory='You are a career consultant with deep knowledge of various industries and job markets. You specialize in matching candidate profiles to ideal job listings.',
-        verbose=False,
-        llm=llm,
-        tools=[web_tool]
-    )
-
-    analyze_resume_task = Task(
-        description=(
-            "Analyze the given resume and extract structured information including:\n"
-            "- Candidate's name\n"
-            "- Contact details\n"
-            "- Skills\n"
-            "- Work experience\n"
-            "- Education history\n"
-            "- Certifications (if any)\n\n"
-            "Output MUST be in JSON format. STRICT REQUIREMENT: The final output file MUST contain ONLY the JSON object. Do not include any preamble, explanation, or markdown wrappers like ```json."
-        ),
-        expected_output=(
-            "A JSON summary of the candidate's resume including skills, experiences, "
-            "education, certifications, and personal info."
-        ),
-        agent=resume_analyzer,
-        output_file='temp_resume_summary.txt'
-    )
-
-    find_jobs_task = Task(
-        description=(
-            "Using the candidate profile from the Resume Analyzer (temp_resume_summary.txt), "
-            "search for relevant job listings from Indeed, LinkedIn, Glassdoor, etc.\n"
-            "Match jobs to candidate's background and give output in JSON. STRICT REQUIREMENT: The final output file MUST contain ONLY the JSON array of jobs. Do not include any preamble, explanation, or markdown wrappers like ```json."
-        ),
-        expected_output=(
-            "A JSON list of at least 5 jobs with:\n"
-            "- Title\n- Company\n- Location\n- Match reason\n- Apply URL"
-        ),
-        agent=job_finder,
-        output_file='temp_jobs.txt',
-        context=[analyze_resume_task]
-    )
-
-    return [resume_analyzer, job_finder], [analyze_resume_task, find_jobs_task]
-
-# 💡 UPDATED FUNCTION FOR ROBUST JSON EXTRACTION
-def clean_json_output(content):
-    content = content.strip()
-    
-    # 1. Remove markdown wrapper (if present)
-    if content.startswith('```json'):
-        content = content[7:].strip()
-    if content.startswith('```'):
-        content = content[3:].strip()
-    if content.endswith('```'):
-        content = content[:-3].strip()
-        
-    # 2. Use regex to find and extract the outermost JSON object/array
-    # This searches for the structure starting with { or [ and ending with the corresponding } or ].
-    match = re.search(r'(\{|\[).*(\]|\})', content, re.DOTALL)
-    if match:
-        return match.group(0).strip()
-    
-    # Fallback to original content if no clear JSON structure is found
-    return content
-
-def run_crew(pdf_path):
-    llm = initialize_llm()
-    pdf_tool = create_pdf_tool(pdf_path)
-    web_tool = create_web_search_tool()
-    agents, tasks = create_agents_and_tasks(pdf_tool, web_tool, llm)
-
-    crew = Crew(
-        agents=agents,
-        tasks=tasks,
-        process=Process.sequential,
-        verbose=True
-    )
-
+# --- CrewAI Setup Function ---
+def kickoff_crew_analysis(file_path: str):
+    """Initializes and runs the CrewAI process with the uploaded PDF."""
     try:
-        # The kickoff might be what's causing the underlying issue if it fails silently
-        # to produce the output files. We proceed assuming the CrewAI part works.
-        result = crew.kickoff()
+        # 1. Initialize LLM
+        gemini_llm = LLM(
+            model="gemini/gemini-2.5-flash",
+            api_key=GEMINI_KEY,
+            temperature=0.5
+        )
+
+        # 2. Initialize Tools
+        # PDFSearchTool is initialized with the dynamic file_path
+        reader = PDFSearchTool(
+            pdf=file_path,
+            config=dict(
+                llm=dict(
+                    provider="google",
+                    config=dict(
+                        model="gemini-2.5-flash", 
+                        api_key=GEMINI_KEY,
+                        temperature=0.5
+                    ),
+                ),
+                embedding_model=dict(
+                    provider="sentence-transformer", 
+                    config=dict(
+                        model=EMBEDDING_MODEL_NAME, 
+                    ),
+                ),
+                vectordb=dict(
+                    provider="chromadb",
+                    config=dict(
+                        collection_name="resume_project", 
+                    )
+                ),
+            )
+        )
+
+        web_search_tool = SerperDevTool(api_key=SERPER_KEY)
+
+        # 3. Define Agents
+        resume_analyzer = Agent(
+            role='Resume Analyzer',
+            goal='Extract detailed information such as skills, work experience, and education from a candidate’s resume text.',
+            backstory='You are a senior HR professional with years of experience in resume analysis and candidate profiling.',
+            verbose=False, # Set to False for production endpoint output
+            llm=gemini_llm,
+            tools=[reader],
+            allow_delegation=False
+        )
+
+        job_finder = Agent(
+            role='Job Finder',
+            goal='Identify relevant job opportunities that match the candidate’s skills and background extracted from the resume.',
+            backstory='You are a career consultant with deep knowledge of various industries and job markets. You specialize in matching candidate profiles to ideal job listings.',
+            verbose=False, # Set to False for production endpoint output
+            llm=gemini_llm,
+            tools=[web_search_tool],
+            allow_delegation=False
+        )
+
+        # 4. Define Tasks
+        analyze_resume_task = Task(
+            description=(
+                "Analyze the given resume and extract structured information including:\n"
+                "- Candidate's name\n"
+                "- Contact details\n"
+                "- Skills\n"
+                "- Work experience\n"
+                "- Education history\n"
+                "- Certifications (if any)\n\n"
+                "Output MUST be in a single JSON object. DO NOT include any explanatory text outside the JSON."
+            ),
+            expected_output=(
+                "A JSON summary of the candidate's resume including skills, experiences, "
+                "education, certifications, and personal info."
+            ),
+            agent=resume_analyzer
+            # Removed output_file since we capture output directly
+        )
+
+        find_jobs_task = Task(
+            description=(
+                "Using the candidate profile from the Resume Analyzer, "
+                "search for relevant job listings from Indeed, LinkedIn, Glassdoor, etc.\n"
+                "Match jobs to candidate's background and give output as a JSON list of objects. "
+                "DO NOT include any explanatory text outside the JSON."
+            ),
+            expected_output=(
+                "A JSON list of at least 5 jobs with:\n"
+                "- Title\n- Company\n- Location\n- Match reason\n- Apply URL"
+            ),
+            agent=job_finder,
+            context=[analyze_resume_task]
+            # Removed output_file since we capture output directly
+        )
+
+        # 5. Create and Kickoff Crew
+        crew = Crew(
+            agents=[resume_analyzer, job_finder],
+            tasks=[analyze_resume_task, find_jobs_task],
+            process=Process.sequential,
+            verbose=True # Keep verbose for internal debugging logs
+        )
+
+        # The result from crew.kickoff() will be the output of the last task (find_jobs_task).
+        # We need to capture the output of *both* tasks.
+        final_result = crew.kickoff()
         
-        # --- Resume Summary Parsing ---
-        with open('temp_resume_summary.txt', 'r') as f:
-            raw_content = f.read()
-            cleaned_resume = clean_json_output(raw_content)
-            resume_summary = json.loads(cleaned_resume)
+        # We can reconstruct the results from the tasks internal memory for better structure
+        resume_json = analyze_resume_task.output.raw_output
+        jobs_json = find_jobs_task.output.raw_output
         
-        # --- Jobs List Parsing ---
-        with open('temp_jobs.txt', 'r') as f:
-            raw_content = f.read()
-            cleaned_jobs = clean_json_output(raw_content)
-            jobs = json.loads(cleaned_jobs)
+        # Try to parse the raw outputs to ensure they are valid JSON before sending
+        try:
+            resume_data = json.loads(resume_json)
+        except json.JSONDecodeError:
+            resume_data = {"error": "Could not parse resume JSON output.", "raw_output": resume_json}
+
+        try:
+            jobs_data = json.loads(jobs_json)
+        except json.JSONDecodeError:
+            jobs_data = {"error": "Could not parse jobs JSON output.", "raw_output": jobs_json}
         
-        # Clean up temporary files
-        os.remove('temp_resume_summary.txt')
-        os.remove('temp_jobs.txt')
-        
-        # Ensure 'jobs' is a list (if the LLM outputted an object instead of an array)
-        if isinstance(jobs, dict):
-            # Attempt to find the list of jobs if wrapped in an object
-            jobs_list = []
-            for value in jobs.values():
-                if isinstance(value, list):
-                    jobs_list = value
-                    break
-            jobs = jobs_list
-            
         return {
-            'success': True,
-            'resume': resume_summary,
-            'jobs': jobs,
-            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            "resume_summary": resume_data,
+            "job_listings": jobs_data
         }
+
     except Exception as e:
-        # Include the content that failed to parse for better debugging
-        error_details = {
-            'error': str(e),
-            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        }
-        
-        # Attempt to read the raw outputs for debugging visibility
-        try:
-            with open('temp_resume_summary.txt', 'r') as f:
-                error_details['raw_resume_output'] = f.read()
-        except FileNotFoundError:
-            error_details['raw_resume_output'] = 'File not created or accessible.'
-            
-        try:
-            with open('temp_jobs.txt', 'r') as f:
-                error_details['raw_jobs_output'] = f.read()
-        except FileNotFoundError:
-            error_details['raw_jobs_output'] = 'File not created or accessible.'
-            
-        return {
-            'success': False,
-            'error': f"JSON Error: {error_details['error']}. Check temp outputs for content. Resume Output: '{error_details['raw_resume_output'][:100]}...', Jobs Output: '{error_details['raw_jobs_output'][:100]}...'",
-            'timestamp': error_details['timestamp']
-        }
+        # General error handling for CrewAI execution
+        return {"error": f"Crew execution failed: {str(e)}"}, 500
 
-@app.route('/')
-def index():
-    return render_template('index.html')
 
-@app.route('/analyze', methods=['POST'])
-def analyze():
-    if 'file' not in request.files:
-        flash('No file selected.')
-        return redirect(url_for('index'))
+# --- Flask Route for File Upload and Analysis ---
+@app.route('/upload_resume', methods=['POST'])
+def upload_resume():
+    """Endpoint to handle resume upload and start the CrewAI analysis."""
+    if 'resume' not in request.files:
+        return jsonify({"error": "No file part in the request"}), 400
     
-    file = request.files['file']
+    file = request.files['resume']
+    
     if file.filename == '':
-        flash('No file selected.')
-        return redirect(url_for('index'))
+        return jsonify({"error": "No selected file"}), 400
     
-    if file and file.filename.lower().endswith('.pdf'):
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
+    if file and file.filename.endswith('.pdf'):
+        # Use tempfile to securely save the uploaded file
+        temp_dir = tempfile.gettempdir()
+        temp_file_path = os.path.join(temp_dir, file.filename)
+        file.save(temp_file_path)
+
+        try:
+            # Run the CrewAI process
+            results = kickoff_crew_analysis(temp_file_path)
+            
+            # Check if the result is an error message
+            if 'error' in results:
+                return jsonify(results), results.get('status', 500)
+                
+            return jsonify(results), 200
         
-        results = run_crew(filepath)
-        os.remove(filepath)
-        
-        if results['success']:
-            return render_template('results.html', 
-                                 resume=results['resume'], 
-                                 jobs=results['jobs'],
-                                 timestamp=results['timestamp'])
-        else:
-            flash(f'Processing Error: {results["error"]}')
-            return redirect(url_for('index'))
+        finally:
+            # IMPORTANT: Clean up the temporary file after processing
+            if os.path.exists(temp_file_path):
+                os.remove(temp_file_path)
     else:
-        flash('Please upload a valid PDF file.')
-        return redirect(url_for('index'))
+        return jsonify({"error": "Invalid file type. Please upload a PDF."}), 400
 
-@app.route('/progress')
-def progress():
-    return jsonify({'progress': 50, 'status': 'Processing...'})
-
+# --- Run Application ---
 if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    # You might need to change the port or host for deployment
+    app.run(debug=True, port=5000)

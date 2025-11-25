@@ -9,62 +9,66 @@
       "github": "github.com/ShubK9"
     }
   },
+  "professional_summary": "Enthusiastic and motivated Software Developer with a foundational knowledge of Python, Java, and Web Development. Gained hands-on experience in building responsive, user-friendly websites using HTML, CSS, and JavaScript through personal and client projects. Passionate about continuously learning new technologies and applying problem-solving skills to create innovative solutions. Eager to contribute to impactful projects, enhance technical expertise, and grow within the IT industry while delivering high-quality applications.",
+  "education": [
+    {
+      "institution": "Indian Institute of Computer science",
+      "location": "Delhi, India",
+      "degree": "Advance Diploma in Website Development",
+      "duration": "June 2022 - December 2024"
+    },
+    {
+      "institution": "Pataliputra University",
+      "location": "Patna, Bihar, India",
+      "degree": "B.Sc. in Mathematics (Honours)",
+      "duration": "June 2021 - April 2024"
+    }
+  ],
   "skills": {
     "programming_languages": ["Python", "Java", "React.Js", "MySQL"],
-    "web_development": ["HTML", "CSS", "JavaScript", "Bootstrap"],
-    "libraries_tools": ["Pandas", "Git/GitHub"],
+    "web_development": ["HTML/CSS/JavaScript", "Bootstrap"],
+    "libraries_and_tools": ["Pandas", "Git/GitHub"],
     "additional_skills": ["WordPress", "Adobe Photoshop", "CorelDRAW", "Adobe Illustrator", "Adobe InDesign"]
   },
   "work_experience": [
     {
       "title": "Freelancing Work",
-      "company": null,
       "location": "Delhi, India",
-      "start_date": "March 2024",
-      "end_date": "May 2024",
+      "duration": "March 2024 - May 2024",
       "responsibilities": [
-        "Developed a website for local travel agencies using HTML, CSS, Bootstrap, and basic JavaScript – Providing a responsive and interactive user experience.",
-        "Collaborated with clients to understand their needs, translating requirements into functional website features.",
-        "Implemented SEO best practices to improve site visibility and organic traffic.",
-        "Managed project timelines and deliverables, ensuring client satisfaction."
+        "Developed a website for local travel agencies using HTML, CSS, Bootstrap, and basic JavaScript – Providing a seamless user experience and an intuitive interface for customers to explore various travel packages.",
+        "Implemented responsive design principles, ensuring optimal viewing and interaction across a wide range of devices, including desktops, tablets, and smartphones.",
+        "Collaborated closely with clients to understand their specific requirements and preferences, translating their vision into a functional and aesthetically pleasing website.",
+        "Optimized website performance, resulting in faster loading times and improved search engine visibility, contributing to enhanced online presence and customer engagement."
       ]
     }
   ],
-  "education_history": [
+  "projects": [
     {
-      "degree": "Advance Diploma in Website Development",
-      "institution": "Indian Institute of Computer science",
-      "location": "Delhi, India",
-      "start_date": "June 2022",
-      "end_date": "December 2024"
+      "title": "E-commerce Website",
+      "duration": "April 2024 - May 2024",
+      "description": [
+        "Developed a fully functional e-commerce platform using HTML, CSS, JavaScript, and React.js, enabling users to browse products, add them to a cart, and complete purchases securely.",
+        "Implemented user authentication and authorization features, ensuring secure access and personalized experiences for registered users.",
+        "Integrated payment gateway APIs to facilitate seamless and secure transactions, enhancing the overall user experience.",
+        "Designed and implemented a responsive user interface, ensuring optimal viewing and interaction across various devices and screen sizes."
+      ]
     },
     {
-      "degree": "B.Sc. in Mathematics (Honours)",
-      "institution": "Pataliputra University",
-      "location": "Patna, Bihar, India",
-      "start_date": "June 2021",
-      "end_date": "April 2024"
+      "title": "Weather App",
+      "duration": "March 2024 - March 2024",
+      "description": [
+        "Developed a dynamic weather application using HTML, CSS, and JavaScript, allowing users to search for real-time weather updates by city.",
+        "Integrated a third-party weather API to fetch accurate and up-to-date weather data, including temperature, humidity, and wind speed.",
+        "Implemented a user-friendly interface with clear visual representations of weather conditions, enhancing usability and accessibility.",
+        "Ensured cross-browser compatibility and responsiveness, providing a consistent experience across different devices and web browsers."
+      ]
     }
   ],
   "certifications": [
-    "Certified in Python Programming from Coursera",
-    "Certified in Java Programming from Udemy",
-    "Certified in Web Development from Internshala"
-  ],
-  "projects": [
-    {
-      "name": "E-commerce Website",
-      "technologies": ["React.js", "Node.js", "Express.js", "MongoDB"],
-      "description": "Developed a full-stack e-commerce platform with user authentication, product listings, shopping cart, and payment gateway integration. Implemented secure user authentication using JWT and bcrypt for password hashing. Designed and developed a responsive and intuitive user interface using React.js, ensuring a seamless shopping experience. Managed product data, user profiles, and order history using MongoDB, ensuring data integrity and efficient retrieval. Collaborated with a team of developers, utilizing Git for version control and agile methodologies for project management."
-    },
-    {
-      "name": "Weather App",
-      "technologies": ["HTML", "CSS", "JavaScript", "OpenWeather API"],
-      "description": "Designed and developed a dynamic weather application that provides real-time weather updates based on user location or search input. Integrated the OpenWeather API to fetch accurate and up-to-date weather data, including temperature, humidity, and wind speed. Implemented responsive design principles to ensure optimal viewing across various devices. Utilized asynchronous JavaScript to handle API requests and update the UI dynamically, providing a smooth user experience."
-    }
-  ],
-  "languages": ["English", "Hindi"],
-  "interests": ["Reading", "Traveling", "Photography", "Cricket", "Chess"],
-  "references": "Available upon request"
+    "Python Programming (Online Course) - Coursera",
+    "Web Development Bootcamp (Online Course) - Udemy",
+    "JavaScript Essentials (Online Course) - freeCodeCamp"
+  ]
 }
 ```

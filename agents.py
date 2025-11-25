@@ -8,7 +8,7 @@ EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
 load_dotenv()
 
-gemini_key = os.getenv('ARYAN_GEMINI_KEY')
+gemini_key = os.getenv('GEMINI_API_KEY_SHAKTHI')
 serper_key = os.getenv('SERPER_API_KEY')
 
 file_path = r"Sample_resume1.pdf" 
@@ -114,9 +114,44 @@ crew = Crew(
     verbose=True
 )
 
+# ... (rest of the original agents.py code) ...
+
 try:
     result = crew.kickoff()
     print("Crew execution completed successfully.")
     print(result)
+    
+    # --- POST-PROCESSING STEP ---
+    output_file_path = 'jobs.json'
+    print(f"Cleaning {output_file_path}...")
+    
+    try:
+        with open(output_file_path, 'r') as f:
+            content = f.read()
+        
+        # Remove common markdown fence
+        if content.strip().startswith('```json'):
+            content = content.replace('```json', '', 1).strip()
+        if content.strip().endswith('```'):
+            content = content.rsplit('```', 1)[0].strip()
+            
+        # Optional: Attempt to load/save to validate and re-format JSON
+        import json
+        clean_data = json.loads(content)
+        
+        with open(output_file_path, 'w') as f:
+            json.dump(clean_data, f, indent=4)
+        
+        print(f"Successfully cleaned and re-saved {output_file_path}.")
+
+    except FileNotFoundError:
+        print(f"Warning: Output file {output_file_path} not found for cleaning.")
+    except json.JSONDecodeError as e:
+        print(f"Error decoding JSON during cleaning: {e}. File content might be malformed.")
+    except Exception as e:
+        print(f"An unexpected error occurred during file cleaning: {e}")
+        
+    # --- END POST-PROCESSING STEP ---
+
 except Exception as e:
     print(f"Error during crew execution: {str(e)}")

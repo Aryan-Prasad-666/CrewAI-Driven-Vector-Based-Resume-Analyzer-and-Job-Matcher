@@ -1,81 +1,304 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Resume Analyzer & Job Matcher</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>CrewAI Resume Job Matcher</title>
+    <!-- Load Tailwind CSS -->
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
     <script>
-        tailwind.config = { darkMode: 'class' }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
     </script>
     <style>
-        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .fade-in { animation: fadeIn 1s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .hover-lift { transition: transform 0.3s; }
-        .hover-lift:hover { transform: translateY(-5px); }
+        /* Custom scrollbar for better look */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1; /* slate-300 */
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background-color: #f1f5f9; /* slate-100 */
+        }
     </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
-    <!-- Dark Mode Toggle -->
-    <button onclick="toggleDarkMode()" class="fixed top-4 right-4 p-2 bg-gray-200 dark:bg-gray-700 rounded-full z-50">
-        <i class="fas fa-moon dark:hidden"></i>
-        <i class="fas fa-sun hidden dark:block"></i>
-    </button>
-    
-    <div class="container mx-auto px-4 py-8">
-        <!-- Hero Section -->
-        <div class="text-center mb-12 fade-in">
-            <h1 class="text-5xl font-bold gradient-bg bg-clip-text text-transparent mb-4">
-                <i class="fas fa-rocket mr-3"></i>AI-Powered Resume Magic
+<body class="bg-gray-50 font-sans min-h-screen p-4 sm:p-8">
+    <div class="max-w-7xl mx-auto">
+        <header class="text-center py-6 mb-8 bg-white shadow-lg rounded-xl">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-indigo-700">
+                AI Resume & Job Matcher
             </h1>
-            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">Upload your resume, unlock insights, and discover dream jobs in seconds!</p>
-            <div class="flex justify-center">
-                <div class="w-24 h-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
-                    <i class="fas fa-file-alt text-3xl text-white"></i>
-                </div>
-            </div>
-        </div>
+            <p class="text-gray-600 mt-2 text-lg">Powered by CrewAI and Gemini</p>
+        </header>
 
-        <div class="max-w-md mx-auto fade-in">
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 hover-lift">
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        <div class="bg-red-100 dark:bg-red-900 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                            {{ messages[0] }}
-                        </div>
-                    {% endif %}
-                {% endwith %}
-                <form method="POST" action="/analyze" enctype="multipart/form-data" id="uploadForm">
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium mb-2">
-                            <i class="fas fa-cloud-upload-alt mr-2"></i>Select Your PDF Resume
-                        </label>
-                        <input type="file" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                               id="file" name="file" accept=".pdf" required>
-                    </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover-lift shadow-lg transition-all duration-300">
-                        <i class="fas fa-magic mr-2"></i>Analyze & Match Jobs
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Upload Panel -->
+            <div class="lg:col-span-1 bg-white p-6 sm:p-8 rounded-xl shadow-lg h-fit sticky top-4">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">1. Upload Resume</h2>
+                
+                <form id="uploadForm" class="space-y-4">
+                    <label for="resumeFile" class="block text-sm font-medium text-gray-700">
+                        Select PDF File:
+                    </label>
+                    <input type="file" id="resumeFile" name="resume" accept=".pdf" required
+                           class="w-full text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer"
+                           onchange="document.getElementById('fileNameDisplay').textContent = this.files[0] ? this.files[0].name : 'No file selected'">
+                    
+                    <p id="fileNameDisplay" class="text-sm text-gray-500 mt-2 italic">No file selected</p>
+
+                    <button type="submit" id="submitBtn"
+                            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition duration-200 shadow-md focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 disabled:bg-indigo-400">
+                        Analyze & Find Jobs
                     </button>
                 </form>
+
+                <!-- Loading/Status Indicator -->
+                <div id="statusMessage" class="mt-6 p-4 text-sm rounded-lg text-center hidden"></div>
             </div>
-        </div>
+
+            <!-- Results Panel -->
+            <div class="lg:col-span-2 space-y-8">
+                <div id="resumeSummary" class="bg-white p-6 sm:p-8 rounded-xl shadow-lg hidden">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2 flex justify-between items-center">
+                        2. Resume Summary 
+                        <span class="text-xs font-normal text-indigo-500 bg-indigo-50 px-2 py-1 rounded-full">Extracted by Resume Analyzer</span>
+                    </h2>
+                    <div id="summaryContent" class="space-y-3 text-gray-700 custom-scrollbar max-h-[500px] overflow-y-auto">
+                        <!-- Summary content will be injected here -->
+                    </div>
+                </div>
+
+                <div id="jobListings" class="bg-white p-6 sm:p-8 rounded-xl shadow-lg hidden">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2 flex justify-between items-center">
+                        3. Matching Job Listings
+                        <span class="text-xs font-normal text-green-500 bg-green-50 px-2 py-1 rounded-full">Matched by Job Finder</span>
+                    </h2>
+                    <div id="jobsContent" class="space-y-6">
+                        <!-- Job listings will be injected here -->
+                    </div>
+                </div>
+
+                <!-- Initial Placeholder -->
+                <div id="placeholder" class="lg:col-span-2 bg-indigo-50 border-2 border-indigo-200 border-dashed p-12 rounded-xl text-center text-indigo-600">
+                    <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" class="mx-auto h-12 w-12 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <p class="text-xl font-medium">Upload a Resume PDF to begin the analysis and job search.</p>
+                    <p class="text-sm mt-2">The AI Crew will extract skills, experience, and find personalized job matches.</p>
+                </div>
+                
+                <!-- Error Display -->
+                <div id="errorDisplay" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md hidden" role="alert">
+                    <p class="font-bold">An Error Occurred</p>
+                    <p id="errorMessage"></p>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script>
-        function toggleDarkMode() {
-            document.documentElement.classList.toggle('dark');
-            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
-        }
-        if (localStorage.getItem('darkMode') === 'true') document.documentElement.classList.add('dark');
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const fileInput = document.getElementById('resumeFile');
+            const submitBtn = document.getElementById('submitBtn');
+            const statusMessage = document.getElementById('statusMessage');
+            const placeholder = document.getElementById('placeholder');
+            const resumeSummaryDiv = document.getElementById('resumeSummary');
+            const jobListingsDiv = document.getElementById('jobListings');
+            const errorDisplay = document.getElementById('errorDisplay');
+            
+            // Reset state
+            statusMessage.classList.add('hidden');
+            errorDisplay.classList.add('hidden');
+            resumeSummaryDiv.classList.add('hidden');
+            jobListingsDiv.classList.add('hidden');
+            placeholder.classList.add('hidden');
+            
+            if (fileInput.files.length === 0) {
+                alert('Please select a PDF file.');
+                return;
+            }
 
-        // Loading simulation on submit
-        document.getElementById('uploadForm').addEventListener('submit', function() {
-            const btn = this.querySelector('button');
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Analyzing...';
-            btn.disabled = true;
+            const file = fileInput.files[0];
+            if (file.type !== 'application/pdf') {
+                document.getElementById('errorMessage').textContent = 'Only PDF files are supported.';
+                errorDisplay.classList.remove('hidden');
+                placeholder.classList.remove('hidden');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('resume', file);
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Crew is Analyzing... (May take a minute)';
+            statusMessage.textContent = 'Processing resume and searching the web...';
+            statusMessage.classList.remove('hidden');
+            statusMessage.classList.remove('bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
+            statusMessage.classList.add('bg-indigo-100', 'text-indigo-700');
+
+
+            // --- Fetch Call to Flask Backend ---
+            const apiUrl = '[http://127.0.0.1:5000/upload_resume](http://127.0.0.1:5000/upload_resume)'; // Make sure this matches your Flask port
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                
+                if (!response.ok || result.error) {
+                    throw new Error(result.error || `Server returned status: ${response.status}`);
+                }
+
+                // --- Handle Success ---
+                submitBtn.textContent = 'Analysis Complete!';
+                statusMessage.textContent = 'Successfully analyzed and matched jobs!';
+                statusMessage.classList.remove('bg-indigo-100', 'text-indigo-700');
+                statusMessage.classList.add('bg-green-100', 'text-green-700');
+
+                displayResults(result);
+
+            } catch (error) {
+                // --- Handle Error ---
+                console.error('Analysis failed:', error);
+                
+                submitBtn.textContent = 'Analyze & Find Jobs';
+                
+                statusMessage.classList.add('hidden');
+
+                document.getElementById('errorMessage').textContent = error.message;
+                errorDisplay.classList.remove('hidden');
+                placeholder.classList.remove('hidden');
+
+            } finally {
+                // Reset button after a delay or immediately
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    if (submitBtn.textContent === 'Analysis Complete!') {
+                        submitBtn.textContent = 'Analyze & Find Jobs';
+                    }
+                }, 3000);
+            }
         });
+
+        function displayResults(data) {
+            const summaryContent = document.getElementById('summaryContent');
+            const jobsContent = document.getElementById('jobsContent');
+            const resumeSummaryDiv = document.getElementById('resumeSummary');
+            const jobListingsDiv = document.getElementById('jobListings');
+
+            // --- Display Resume Summary ---
+            summaryContent.innerHTML = formatSummary(data.resume_summary);
+            resumeSummaryDiv.classList.remove('hidden');
+
+            // --- Display Job Listings ---
+            jobsContent.innerHTML = formatJobs(data.job_listings);
+            jobListingsDiv.classList.remove('hidden');
+        }
+
+        // Helper function to format JSON summary into clean HTML
+        function formatSummary(summary) {
+            let html = '';
+            
+            // Check if summary is a valid object
+            if (typeof summary !== 'object' || summary === null) {
+                 return `<p class="text-red-500">Error: Received non-structured data from analyzer.</p><pre>${JSON.stringify(summary, null, 2)}</pre>`;
+            }
+
+            // Simple key-value display for top-level fields
+            for (const [key, value] of Object.entries(summary)) {
+                // Skip arrays/objects for initial pass, handle primitives
+                if (Array.isArray(value) || typeof value === 'object' && value !== null) {
+                    continue;
+                }
+
+                const displayKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                html += `<p><strong class="text-indigo-600">${displayKey}:</strong> ${value}</p>`;
+            }
+
+            // Handle structured lists (skills, experience, education)
+            for (const [key, value] of Object.entries(summary)) {
+                if (Array.isArray(value)) {
+                    const displayKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                    html += `<div class="mt-4"><h3 class="text-lg font-semibold text-gray-800 border-b mt-2">${displayKey}</h3><ul class="list-disc list-inside space-y-1 pl-4 pt-1">`;
+                    
+                    value.forEach(item => {
+                        if (typeof item === 'object' && item !== null) {
+                            // Format complex objects like experience or education
+                            let detail = '';
+                            for (const [k, v] of Object.entries(item)) {
+                                if (v) {
+                                    const displayK = k.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                                    detail += `<span class="mr-3"><strong class="font-medium">${displayK}:</strong> ${v}</span>`;
+                                }
+                            }
+                            html += `<li>${detail}</li>`;
+                        } else {
+                            // Format simple list items (e.g., skills)
+                            html += `<li>${item}</li>`;
+                        }
+                    });
+                    
+                    html += `</ul></div>`;
+                }
+            }
+
+            return html || '<p class="text-gray-500">No structured data was extracted. Please check the raw output in the console.</p>';
+        }
+
+        // Helper function to format JSON jobs into clean HTML
+        function formatJobs(jobs) {
+            // Check if jobs is an array
+            if (!Array.isArray(jobs)) {
+                 return `<p class="text-red-500">Error: Received non-array data for job listings. Raw output:</p><pre>${JSON.stringify(jobs, null, 2)}</pre>`;
+            }
+            
+            if (jobs.length === 0) {
+                return '<p class="text-gray-500">The Job Finder did not return any matching jobs.</p>';
+            }
+
+            let html = '';
+            jobs.forEach((job, index) => {
+                html += `
+                    <div class="border border-gray-200 p-4 rounded-xl hover:shadow-md transition duration-200">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-900">${job.Title || 'N/A'}</h3>
+                            <span class="text-xs font-medium text-white bg-indigo-500 px-3 py-1 rounded-full">${job.Location || 'Remote'}</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">
+                            <span class="font-semibold text-gray-800">${job.Company || 'Unknown Company'}</span>
+                        </p>
+                        
+                        <div class="bg-gray-50 p-3 rounded-lg text-sm mb-3">
+                            <p class="font-semibold text-green-700">Match Reason:</p>
+                            <p class="text-gray-700 italic">${job['Match reason'] || 'No specific reason provided.'}</p>
+                        </div>
+                        
+                        <a href="${job['Apply URL'] || '#'}" target="_blank"
+                           class="inline-block bg-green-500 hover:bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition duration-200 ${job['Apply URL'] ? '' : 'opacity-50 pointer-events-none'}"
+                           title="${job['Apply URL'] ? 'Click to apply' : 'URL not provided'}">
+                            Apply Now
+                        </a>
+                    </div>
+                `;
+            });
+            return html;
+        }
     </script>
 </body>
 </html>
